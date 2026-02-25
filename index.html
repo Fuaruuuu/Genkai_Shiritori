@@ -13,11 +13,11 @@
 
     <section class="timers">
       <article class="player-card active" id="player1-card" aria-live="polite">
-        <h2>プレイヤー1</h2>
+        <h2 id="player1-label">プレイヤー1</h2>
         <p class="time" id="player1-time">05:00</p>
       </article>
       <article class="player-card" id="player2-card" aria-live="polite">
-        <h2>プレイヤー2</h2>
+        <h2 id="player2-label">プレイヤー2</h2>
         <p class="time" id="player2-time">05:00</p>
       </article>
     </section>
@@ -36,7 +36,18 @@
           <span>分</span>
         </label>
       </div>
-      <p class="time-note">開始後は変更できません。リセットで再設定できます。</p>
+      <p class="time-note">開始するとこの行は消えます。リセットで再表示されます。</p>
+    </section>
+
+    <section class="controls">
+      <button id="start-pause-btn" type="button">開始</button>
+      <button id="said-btn" type="button">言った（交代）</button>
+      <button id="reset-btn" type="button" class="ghost">リセット</button>
+    </section>
+
+    <section class="draw">
+      <h2>今回の文字数</h2>
+      <p class="draw-value" id="draw-value">-</p>
     </section>
 
     <section class="options" aria-label="オプション">
@@ -58,17 +69,6 @@
           <button type="button" class="option-btn" data-player="1" data-option="pass">パス</button>
         </div>
       </article>
-    </section>
-
-    <section class="controls">
-      <button id="start-pause-btn" type="button">開始</button>
-      <button id="said-btn" type="button">言った（交代）</button>
-      <button id="reset-btn" type="button" class="ghost">リセット</button>
-    </section>
-
-    <section class="draw">
-      <h2>今回の文字数</h2>
-      <p class="draw-value" id="draw-value">-</p>
     </section>
 
     <p class="status" id="status">プレイヤー1から開始できます。</p>

@@ -3,8 +3,11 @@ const DRAW_OPTIONS = ["2", "3", "4", "5", "6", "7+"];
 
 const timeEl1 = document.getElementById("player1-time");
 const timeEl2 = document.getElementById("player2-time");
+const player1LabelEl = document.getElementById("player1-label");
+const player2LabelEl = document.getElementById("player2-label");
 const card1 = document.getElementById("player1-card");
 const card2 = document.getElementById("player2-card");
+const timeSettingsSection = document.querySelector(".time-settings");
 const drawValueEl = document.getElementById("draw-value");
 const statusEl = document.getElementById("status");
 const startPauseBtn = document.getElementById("start-pause-btn");
@@ -32,6 +35,7 @@ let previousTick = null;
 let animationFrameId = null;
 let optionUsed = createInitialOptionUsage();
 let hasGameStarted = false;
+let configuredMinutes = [5, 5];
 
 function createInitialOptionUsage() {
   return [0, 1].map(() =>
@@ -53,7 +57,7 @@ function parseMinutes(inputEl) {
   return clamped;
 }
 
-function getConfiguredTimesMs() {
+function getConfiguredMinutes() {
   const player1Minutes = parseMinutes(player1MinutesInput);
   const player2Minutes = parseMinutes(player2MinutesInput);
 
@@ -61,16 +65,17 @@ function getConfiguredTimesMs() {
     return null;
   }
 
-  return [player1Minutes * 60 * 1000, player2Minutes * 60 * 1000];
+  return [player1Minutes, player2Minutes];
 }
 
 function applyConfiguredTimes() {
-  const configuredTimes = getConfiguredTimesMs();
-  if (configuredTimes === null) {
+  const nextConfiguredMinutes = getConfiguredMinutes();
+  if (nextConfiguredMinutes === null) {
     return false;
   }
 
-  remainingMs = configuredTimes;
+  configuredMinutes = nextConfiguredMinutes;
+  remainingMs = configuredMinutes.map((minutes) => minutes * 60 * 1000);
   return true;
 }
 
@@ -78,6 +83,10 @@ function setTimeInputsDisabled(disabled) {
   timeSettingInputs.forEach((inputEl) => {
     inputEl.disabled = disabled;
   });
+}
+
+function setTimeSettingsVisible(visible) {
+  timeSettingsSection.hidden = !visible;
 }
 
 function formatTime(ms) {
@@ -96,6 +105,7 @@ function updateView() {
 
   card1.classList.toggle("active", activePlayer === 0);
   card2.classList.toggle("active", activePlayer === 1);
+  updatePlayerLabels();
   updateOptionButtons();
 
   if (!running && remainingMs[0] > 0 && remainingMs[1] > 0) {
@@ -105,6 +115,17 @@ function updateView() {
       statusEl.textContent = `プレイヤー${activePlayer + 1}から開始できます。`;
     }
   }
+}
+
+function updatePlayerLabels() {
+  if (hasGameStarted) {
+    player1LabelEl.textContent = `プレイヤー1（開始時間：${configuredMinutes[0]}分）`;
+    player2LabelEl.textContent = `プレイヤー2（開始時間：${configuredMinutes[1]}分）`;
+    return;
+  }
+
+  player1LabelEl.textContent = "プレイヤー1";
+  player2LabelEl.textContent = "プレイヤー2";
 }
 
 function updateOptionButtons() {
@@ -243,6 +264,7 @@ startPauseBtn.addEventListener("click", () => {
 
     hasGameStarted = true;
     setTimeInputsDisabled(true);
+    setTimeSettingsVisible(false);
     updateView();
   }
 
@@ -298,6 +320,7 @@ resetBtn.addEventListener("click", () => {
   activePlayer = 0;
   optionUsed = createInitialOptionUsage();
   setTimeInputsDisabled(false);
+  setTimeSettingsVisible(true);
   if (!applyConfiguredTimes()) {
     remainingMs = [INITIAL_TIME_MS, INITIAL_TIME_MS];
   }
@@ -308,4 +331,5 @@ resetBtn.addEventListener("click", () => {
 
 applyConfiguredTimes();
 setTimeInputsDisabled(false);
+setTimeSettingsVisible(true);
 updateView();
