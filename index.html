@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="app">
+  <main class="app" id="app-root">
     <h1>二人用 文字数指定しりとりタイマー</h1>
     <p class="subtitle">開始前に持ち時間を個別設定できます。現在の手番の人だけ時間が減ります。</p>
 
@@ -22,7 +22,7 @@
       </article>
     </section>
 
-    <section class="time-settings" aria-label="開始時間設定">
+    <section class="time-settings" id="time-settings" aria-label="開始時間設定">
       <h3>開始時間（ハンデ）</h3>
       <div class="time-inputs">
         <label class="time-input">
@@ -74,6 +74,6 @@
     <p class="status" id="status">プレイヤー1から開始できます。</p>
   </main>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260225-2"></script>
 </body>
 </html>

@@ -1,13 +1,14 @@
 const INITIAL_TIME_MS = 5 * 60 * 1000;
 const DRAW_OPTIONS = ["2", "3", "4", "5", "6", "7+"];
 
+const appRoot = document.getElementById("app-root");
 const timeEl1 = document.getElementById("player1-time");
 const timeEl2 = document.getElementById("player2-time");
 const player1LabelEl = document.getElementById("player1-label");
 const player2LabelEl = document.getElementById("player2-label");
 const card1 = document.getElementById("player1-card");
 const card2 = document.getElementById("player2-card");
-const timeSettingsSection = document.querySelector(".time-settings");
+const timeSettingsSection = document.getElementById("time-settings");
 const drawValueEl = document.getElementById("draw-value");
 const statusEl = document.getElementById("status");
 const startPauseBtn = document.getElementById("start-pause-btn");
@@ -86,7 +87,14 @@ function setTimeInputsDisabled(disabled) {
 }
 
 function setTimeSettingsVisible(visible) {
+  if (!timeSettingsSection) {
+    return;
+  }
   timeSettingsSection.hidden = !visible;
+  timeSettingsSection.classList.toggle("is-hidden", !visible);
+  if (appRoot) {
+    appRoot.classList.toggle("game-started", !visible);
+  }
 }
 
 function formatTime(ms) {
@@ -100,6 +108,7 @@ function formatTime(ms) {
 }
 
 function updateView() {
+  setTimeSettingsVisible(!hasGameStarted);
   timeEl1.textContent = formatTime(remainingMs[0]);
   timeEl2.textContent = formatTime(remainingMs[1]);
 
