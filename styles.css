@@ -1,0 +1,231 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  font-family: "BIZ UDPGothic", "Yu Gothic UI", "Meiryo", sans-serif;
+  background: radial-gradient(circle at 20% 20%, #ffe8c7, #ffd4ba 40%, #ffb8b8 100%);
+  color: #222;
+}
+
+.app {
+  width: min(760px, 100%);
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #1d1d1d;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  letter-spacing: 0.02em;
+}
+
+.subtitle {
+  margin: 0 0 18px;
+}
+
+.timers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.time-settings {
+  margin-top: 14px;
+  border: 2px solid #222;
+  border-radius: 12px;
+  padding: 12px;
+  background: #f9fff3;
+}
+
+.time-settings h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.time-inputs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.time-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.time-input input {
+  width: 78px;
+  border: 2px solid #222;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font: inherit;
+  font-weight: 700;
+}
+
+.time-input input:disabled {
+  background: #f0f0f0;
+  color: #555;
+}
+
+.time-note {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+}
+
+.player-card {
+  border: 2px solid #222;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fff7f0;
+  transition: transform 150ms ease, background-color 150ms ease;
+}
+
+.player-card h2 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.player-card .time {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.player-card.active {
+  background: #ffe2a7;
+  transform: translateY(-2px);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.option-card {
+  border: 2px solid #222;
+  border-radius: 12px;
+  padding: 12px;
+  background: #fffdf6;
+}
+
+.option-card h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.option-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.option-btn {
+  background: #e8f5ff;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+}
+
+.option-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.option-btn.used {
+  background: #f3f3f3;
+}
+
+button {
+  border: 2px solid #222;
+  border-radius: 999px;
+  background: #ffe45e;
+  color: #222;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(0.98);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button.ghost {
+  background: #fff;
+}
+
+.draw {
+  margin-top: 18px;
+  border: 2px dashed #222;
+  border-radius: 12px;
+  background: #fff;
+  padding: 14px;
+}
+
+.draw h2 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.draw-value {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+}
+
+.status {
+  margin: 16px 0 0;
+  min-height: 1.4em;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 18px;
+  }
+
+  .timers {
+    grid-template-columns: 1fr;
+  }
+
+  .options {
+    grid-template-columns: 1fr;
+  }
+
+  .time-inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>二人用 文字数指定しりとりタイマー</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <h1>二人用 文字数指定しりとりタイマー</h1>
+    <p class="subtitle">開始前に持ち時間を個別設定できます。現在の手番の人だけ時間が減ります。</p>
+
+    <section class="timers">
+      <article class="player-card active" id="player1-card" aria-live="polite">
+        <h2>プレイヤー1</h2>
+        <p class="time" id="player1-time">05:00</p>
+      </article>
+      <article class="player-card" id="player2-card" aria-live="polite">
+        <h2>プレイヤー2</h2>
+        <p class="time" id="player2-time">05:00</p>
+      </article>
+    </section>
+
+    <section class="time-settings" aria-label="開始時間設定">
+      <h3>開始時間（ハンデ）</h3>
+      <div class="time-inputs">
+        <label class="time-input">
+          <span>プレイヤー1</span>
+          <input id="player1-minutes" type="number" min="1" max="99" value="5">
+          <span>分</span>
+        </label>
+        <label class="time-input">
+          <span>プレイヤー2</span>
+          <input id="player2-minutes" type="number" min="1" max="99" value="5">
+          <span>分</span>
+        </label>
+      </div>
+      <p class="time-note">開始後は変更できません。リセットで再設定できます。</p>
+    </section>
+
+    <section class="options" aria-label="オプション">
+      <article class="option-card">
+        <h3>プレイヤー1 オプション</h3>
+        <div class="option-buttons">
+          <button type="button" class="option-btn" data-player="0" data-option="n-mawashi">ん回し</button>
+          <button type="button" class="option-btn" data-player="0" data-option="reduce-count">文字数減らし</button>
+          <button type="button" class="option-btn" data-player="0" data-option="reset-number">数字リセット</button>
+          <button type="button" class="option-btn" data-player="0" data-option="pass">パス</button>
+        </div>
+      </article>
+      <article class="option-card">
+        <h3>プレイヤー2 オプション</h3>
+        <div class="option-buttons">
+          <button type="button" class="option-btn" data-player="1" data-option="n-mawashi">ん回し</button>
+          <button type="button" class="option-btn" data-player="1" data-option="reduce-count">文字数減らし</button>
+          <button type="button" class="option-btn" data-player="1" data-option="reset-number">数字リセット</button>
+          <button type="button" class="option-btn" data-player="1" data-option="pass">パス</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="controls">
+      <button id="start-pause-btn" type="button">開始</button>
+      <button id="said-btn" type="button">言った（交代）</button>
+      <button id="reset-btn" type="button" class="ghost">リセット</button>
+    </section>
+
+    <section class="draw">
+      <h2>今回の文字数</h2>
+      <p class="draw-value" id="draw-value">-</p>
+    </section>
+
+    <p class="status" id="status">プレイヤー1から開始できます。</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
